@@ -1,0 +1,15 @@
+@(stream:call,post:call)
+
+@main("Welcome to Play") {
+<div class = "log"></div>
+<input type = "text" name = "message" placeholder = "your message"/>
+<script>
+    var user = prompt("What should be your userName?");
+    var feed = new EventSource("@stream.absoluteURL()");
+    feed.addEventListener("message" , function(msg) ){
+    var m = JSON.parse(msg.data)
+    $(".log").append("<div class = 'message'>"+m.user+":"+ m.message +"</div>");})
+</script>
+
+
+}
